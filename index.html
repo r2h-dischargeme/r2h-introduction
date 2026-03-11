@@ -1143,3 +1143,100 @@
         q5_tone_importance:   pollAnswers.q5   ? parseInt(pollAnswers.q5) : null,
         q6_involvement:       Array.isArray(pollAnswers.q6) ? pollAnswers.q6.join(', ') : null,
         q7_failure_risk:      pollAnswers.q7   |
+<script>
+  const answers = {};
+  const TRACKED = ['q1','q2','q2b','q3','q4','q5','q6'];
+
+  function updateProgress() {
+    let answered = 0;
+    TRACKED.forEach(q => {
+      const v = answers[q];
+      if (v !== undefined && v !== '' && !(Array.isArray(v) && v.length === 0)) answered++;
+    });
+    const pct = Math.round((answered / TRACKED.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = answered + ' of 7';
+  }
+
+  document.querySelectorAll('.options[data-type="single"]').forEach(group => {
+    const q = group.dataset.q;
+    group.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[q] = btn.dataset.val;
+        updateProgress();
+      });
+    });
+  });
+
+  document.querySelectorAll('.options[data-type="multi"]').forEach(group => {
+    const q = group.dataset.q;
+    answers[q] = [];
+    group.querySelectorAll('.multi-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        opt.classList.toggle('selected');
+        const val = opt.dataset.val;
+        if (opt.classList.contains('selected')) {
+          if (!answers[q].includes(val)) answers[q].push(val);
+        } else {
+          answers[q] = answers[q].filter(v => v !== val);
+        }
+        updateProgress();
+      });
+    });
+  });
+
+  document.querySelectorAll('.scale-wrap[data-type="scale"]').forEach(wrap => {
+    const q = wrap.dataset.q;
+    wrap.querySelectorAll('.scale-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        wrap.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[q] = btn.dataset.val;
+        updateProgress();
+      });
+    });
+  });
+
+  document.querySelectorAll('.open-input[data-type="text"]').forEach(input => {
+    input.addEventListener('input', () => { 
+      answers[input.dataset.q] = input.value.trim(); 
+    });
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    document.getElementById('sending-overlay').classList.add('show');
+
+    const submissionData = {
+      q1: answers.q1 || '',
+      q2: answers.q2 || '',
+      q2b: Array.isArray(answers.q2b) ? answers.q2b.join(', ') : (answers.q2b || ''),
+      q3: answers.q3 || '',
+      q4: answers.q4 || '',
+      q5: answers.q5 || '',
+      q6: Array.isArray(answers.q6) ? answers.q6.join(', ') : (answers.q6 || ''),
+      q2b_other: answers.q2b_other || '',
+      q7: answers.q7 || '',
+      contact: answers.contact || ''
+    };
+
+    try {
+      await fetch('/api/submit-to-tally', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submissionData)
+      });
+    } catch (e) {}
+
+    document.getElementById('sending-overlay').classList.remove('show');
+    document.getElementById('poll-form').style.display = 'none';
+    document.getElementById('thankyou').classList.add('show');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = '7 of 7';
+  });
+</script>
+</body>
+</html>
