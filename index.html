@@ -263,48 +263,10 @@
   .footer-bottom { max-width: 1080px; margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--w10); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .footer-copy { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--w35); }
 
-  /* POLL EMBED — #pulse section */
+  /* PULSE CTA section */
   #pulse { background: #EAF4F6; }
   #pulse .si { text-align: left; }
   #pulse h2 { color: var(--navy); }
-  #poll-embed { margin-top: 40px; }
-  .poll-progress-text { font-family: 'Space Mono', monospace; font-size: 11px; color: rgba(26,58,82,0.45); margin-bottom: 8px; letter-spacing: 0.05em; }
-  .poll-progress-bar { height: 2px; background: rgba(26,58,82,0.12); margin-bottom: 40px; }
-  .poll-progress-fill { height: 100%; background: var(--teal); transition: width 0.4s ease; }
-  .poll-block { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(26,58,82,0.08); }
-  .poll-block:last-of-type { border-bottom: none; }
-  .poll-q-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--teal); letter-spacing: 0.12em; margin-bottom: 8px; text-transform: uppercase; }
-  .poll-q-text { font-family: 'DM Serif Display', serif; font-size: 20px; line-height: 1.4; color: var(--navy); margin-bottom: 6px; }
-  .poll-q-sub { font-size: 13px; color: rgba(26,58,82,0.5); margin-bottom: 18px; line-height: 1.5; font-weight: 300; }
-  .poll-options { display: flex; flex-direction: column; gap: 8px; }
-  .poll-opt { background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); color: rgba(26,58,82,0.75); padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 15px; cursor: pointer; text-align: left; transition: all 0.2s; line-height: 1.4; position: relative; min-height: 44px; }
-  .poll-opt:hover { border-color: var(--teal); color: var(--navy); background: rgba(26,122,138,0.08); }
-  .poll-opt.selected { border-color: var(--teal); background: rgba(26,122,138,0.12); color: var(--navy); font-weight: 500; }
-  .poll-opt.selected::after { content: '✓'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--teal); font-size: 14px; font-weight: 700; }
-  .poll-multi { display: flex; align-items: flex-start; gap: 12px; background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); padding: 14px 16px; cursor: pointer; transition: all 0.2s; min-height: 44px; }
-  .poll-multi:hover { border-color: var(--teal); background: rgba(26,122,138,0.08); }
-  .poll-multi.selected { border-color: var(--teal); background: rgba(26,122,138,0.12); }
-  .poll-checkbox { width: 16px; height: 16px; border: 1px solid rgba(26,58,82,0.3); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .poll-multi.selected .poll-checkbox { background: var(--teal); border-color: var(--teal); }
-  .poll-tick { color: white; font-size: 10px; display: none; }
-  .poll-multi.selected .poll-tick { display: block; }
-  .poll-multi-label { font-size: 15px; color: rgba(26,58,82,0.75); line-height: 1.4; }
-  .poll-multi.selected .poll-multi-label { color: var(--navy); font-weight: 500; }
-  .poll-scale { display: flex; gap: 6px; align-items: center; }
-  .poll-scale-btn { width: 48px; height: 48px; border: 1px solid rgba(26,58,82,0.15); background: rgba(26,58,82,0.04); color: rgba(26,58,82,0.6); font-family: 'Space Mono', monospace; font-size: 14px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-  .poll-scale-btn:hover { border-color: var(--teal); color: var(--navy); background: rgba(26,122,138,0.08); }
-  .poll-scale-btn.selected { background: var(--teal); border-color: var(--teal); color: var(--white); }
-  .poll-scale-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: rgba(26,58,82,0.4); font-family: 'Space Mono', monospace; }
-  .poll-open { width: 100%; background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 14px 16px; resize: vertical; min-height: 80px; line-height: 1.6; transition: border-color 0.2s; outline: none; }
-  .poll-open::placeholder { color: rgba(26,58,82,0.3); }
-  .poll-open:focus { border-color: var(--teal); }
-  .poll-section-divider { display: flex; align-items: center; gap: 16px; margin: 8px 0 32px; }
-  .poll-section-divider span { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; white-space: nowrap; }
-  .poll-section-divider::before, .poll-section-divider::after { content: ''; flex: 1; height: 1px; background: rgba(26,58,82,0.1); }
-  .poll-submit-section { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(26,58,82,0.1); }
-  .poll-submit-note { font-size: 13px; color: rgba(26,58,82,0.45); margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
-  .poll-thankyou { display: none; text-align: center; padding: 60px 0 20px; }
-  .poll-thankyou.show { display: block; }
 </style>
 </head>
 <body>
@@ -325,7 +287,7 @@
     <li><a href="#involved">Get Involved</a></li>
   </ul>
   <!-- Mobile: pulse check CTA always visible -->
-  <a href="#pulse" class="btn-nav nav-mobile-cta">Take the pulse check</a>
+  <a href="survey.html" class="btn-nav nav-mobile-cta">Take the pulse check</a>
 </nav>
 
 <section id="hero">
@@ -363,7 +325,7 @@
     <h1>The system stops at discharge. R2H doesn't.</h1>
     <p><strong style="color:var(--white);font-weight:600;">Rehab to Home (R2H) Terminus</strong> is a free tool that walks spinal cord injury patients and families through the transition home — honestly, practically, and without the brochure language.</p>
     <div class="hero-btns">
-      <a href="https://r2h-poll.vercel.app/" target="_blank" class="btn-primary">Take the pulse check</a>
+      <a href="survey.html" class="btn-primary">Take the pulse check</a>
       <a href="#what" class="btn-secondary">Learn more</a>
     </div>
   </div>
@@ -745,126 +707,8 @@
     <span class="label" style="color:rgba(17,30,42,0.6);">Community Pulse</span>
     <h2>We're building this from the community.</h2>
     <p class="sub" style="margin:0 auto 40px;color:rgba(17,30,42,0.65);">Your feedback shapes everything. Not in a corporate survey kind of way — in a 'we will literally change what we build based on what you tell us' kind of way.</p>
-
-    <div id="poll-embed">
-
-      <div class="poll-progress-text">QUESTION PROGRESS</div>
-      <div class="poll-progress-bar"><div class="poll-progress-fill" id="pollProgressFill" style="width:0%"></div></div>
-
-      <!-- Q1 -->
-      <div class="poll-block">
-        <div class="poll-q-num">01 · Your Experience</div>
-        <div class="poll-q-text">What's your relationship to spinal cord injury?</div>
-        <div class="poll-q-sub">Select the one that fits best.</div>
-        <div class="poll-options" data-q="q1" data-type="single">
-          <button class="poll-opt" data-val="sci">I have a spinal cord injury</button>
-          <button class="poll-opt" data-val="family">I'm a family member or carer of someone with SCI</button>
-          <button class="poll-opt" data-val="peer">I work in peer support or lived experience roles</button>
-          <button class="poll-opt" data-val="clinical">I work in SCI clinical or allied health</button>
-          <button class="poll-opt" data-val="other">Other connection to the SCI community</button>
-        </div>
-      </div>
-
-      <!-- Q2 -->
-      <div class="poll-block">
-        <div class="poll-q-num">02 · The Discharge Experience</div>
-        <div class="poll-q-text">When you left rehab — or watched someone leave — how prepared did it feel?</div>
-        <div class="poll-q-sub">No right answer. Just honest.</div>
-        <div class="poll-options" data-q="q2" data-type="single">
-          <button class="poll-opt" data-val="1">Completely blindsided. Nothing could have prepared us.</button>
-          <button class="poll-opt" data-val="2">Mostly unprepared. We figured it out the hard way.</button>
-          <button class="poll-opt" data-val="3">Somewhat prepared but the gaps were significant.</button>
-          <button class="poll-opt" data-val="4">Reasonably prepared. Some rough patches but manageable.</button>
-          <button class="poll-opt" data-val="5">Well prepared. The transition went smoothly.</button>
-        </div>
-      </div>
-
-      <!-- Q3 -->
-      <div class="poll-block">
-        <div class="poll-q-num">03 · The First Week</div>
-        <div class="poll-q-text">What was the hardest part of the first week home?</div>
-        <div class="poll-q-sub">Select all that apply.</div>
-        <div class="poll-options" data-q="q3" data-type="multi">
-          <div class="poll-multi" data-val="ndis"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Funding and support — equipment, supports, modifications not in place</div></div>
-          <div class="poll-multi" data-val="family"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Family overwhelmed and unsure what to do or who to call</div></div>
-          <div class="poll-multi" data-val="routine"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Bowel, bladder, skin routines falling apart without clinical support</div></div>
-          <div class="poll-multi" data-val="mental"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Mental health — the emotional crash of being home without the ward structure</div></div>
-          <div class="poll-multi" data-val="info"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">No single place to find information — piecing it together from everywhere</div></div>
-          <div class="poll-multi" data-val="contact"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Not knowing who to call when something went wrong</div></div>
-          <div class="poll-multi" data-val="other_hard"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Something else entirely</div></div>
-        </div>
-      </div>
-
-      <div class="poll-section-divider"><span>About R2H</span></div>
-
-      <!-- Q4 -->
-      <div class="poll-block">
-        <div class="poll-q-num">04 · The Concept</div>
-        <div class="poll-q-text">R2H is a free digital guide — no download, works on any device — that walks you through discharge in four stages and is designed to be deleted when you don't need it anymore. Does that sound useful?</div>
-        <div class="poll-q-sub">Based on what you know so far.</div>
-        <div class="poll-options" data-q="q4" data-type="single">
-          <button class="poll-opt" data-val="yes_need">Yes — I needed exactly this and it didn't exist</button>
-          <button class="poll-opt" data-val="yes_useful">Yes — it sounds genuinely useful</button>
-          <button class="poll-opt" data-val="maybe">Maybe — depends on how it's done</button>
-          <button class="poll-opt" data-val="no">No — I don't think it would have helped my situation</button>
-          <button class="poll-opt" data-val="unsure">Not sure yet</button>
-        </div>
-      </div>
-
-      <!-- Q5 -->
-      <div class="poll-block">
-        <div class="poll-q-num">05 · The Tone</div>
-        <div class="poll-q-text">R2H is built on a principle of radical honesty — no toxic positivity, no inspirational framing, no "you've got this!" when things genuinely suck. How important is that to you?</div>
-        <div class="poll-q-sub">1 = doesn't matter · 5 = that's everything</div>
-        <div class="poll-scale" data-q="q5" data-type="scale">
-          <button class="poll-scale-btn" data-val="1">1</button>
-          <button class="poll-scale-btn" data-val="2">2</button>
-          <button class="poll-scale-btn" data-val="3">3</button>
-          <button class="poll-scale-btn" data-val="4">4</button>
-          <button class="poll-scale-btn" data-val="5">5</button>
-        </div>
-        <div class="poll-scale-labels"><span>doesn't matter</span><span>everything</span></div>
-      </div>
-
-      <!-- Q6 -->
-      <div class="poll-block">
-        <div class="poll-q-num">06 · Your Role in This</div>
-        <div class="poll-q-text">If R2H moves forward, what would you want to be involved in?</div>
-        <div class="poll-q-sub">Select all that apply.</div>
-        <div class="poll-options" data-q="q6" data-type="multi">
-          <div class="poll-multi" data-val="codesign"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Co-design — shaping what the tool actually does and how it works</div></div>
-          <div class="poll-multi" data-val="test"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Testing — trying early versions and giving blunt feedback</div></div>
-          <div class="poll-multi" data-val="workingparty"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Working party — formal lived experience liaison role with Austin Health</div></div>
-          <div class="poll-multi" data-val="spread"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Spreading the word — sharing this with others in the SCI community</div></div>
-          <div class="poll-multi" data-val="watch"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Just staying informed — I want to know how this develops</div></div>
-          <div class="poll-multi" data-val="nothing"><div class="poll-checkbox"><span class="poll-tick">✓</span></div><div class="poll-multi-label">Nothing right now — but keep the feedback coming</div></div>
-        </div>
-      </div>
-
-      <!-- Q7 -->
-      <div class="poll-block">
-        <div class="poll-q-num">07 · The Honest One</div>
-        <div class="poll-q-text">What would make R2H fail? What's the thing that could go wrong?</div>
-        <div class="poll-q-sub">Optional — but the most valuable question on this page. Blunt answers only.</div>
-        <textarea class="poll-open" data-q="q7" data-type="text" placeholder="If you're going to say something, say it straight..."></textarea>
-      </div>
-
-      <!-- Submit -->
-      <div class="poll-submit-section">
-        <p class="poll-submit-note">Anonymous unless you choose to share your contact below. No data is sold. No spam. This is a community conversation, not a mailing list.</p>
-        <textarea class="poll-open" data-q="contact" data-type="text" placeholder="Optional: name / email / preferred way to be contacted if you want to be part of this" style="min-height:56px;margin-bottom:20px;"></textarea>
-        <button class="btn-dark" id="pollSubmitBtn" onclick="submitPoll()">Submit — I've said my piece</button>
-      </div>
-
-    </div>
-
-    <div class="poll-thankyou" id="pollThankyou">
-      <div style="font-size:40px;margin-bottom:20px;">✊</div>
-      <h3 style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);margin-bottom:12px;">That's a 1mm forward.</h3>
-      <p style="font-size:16px;color:rgba(17,30,42,0.65);line-height:1.7;max-width:460px;margin:0 auto;">Your response has been recorded. It goes directly into the design of R2H — not into a spreadsheet nobody reads. The SCI community is building this. You're part of it.</p>
-    </div>
-
-    <p class="pulse-note" id="pollNote"><strong>No email required. No account. Just your honest take.</strong></p>
+    <a href="survey.html" class="btn-dark">Take the pulse check →</a>
+    <p class="pulse-note" style="margin-top:16px;"><strong>7 questions. No email required. No account. Just your honest take.</strong></p>
   </div>
 </section>
 
@@ -975,7 +819,7 @@
       <h4>Contact</h4>
       <ul>
         <li><a href="/cdn-cgi/l/email-protection#5624643e78323f25353e37243133783b3316313b373f3a7835393b"><span class="__cf_email__" data-cfemail="afdd9dc781cbc6dcccc7ceddc8ca81c2caefc8c2cec6c381ccc0c2">[email&#160;protected]</span></a></li>
-        <li><a href="https://r2h-poll.vercel.app/" target="_blank">Take the pulse check</a></li>
+        <li><a href="survey.html">Take the pulse check</a></li>
       </ul>
     </div>
   </div>
@@ -1066,80 +910,6 @@
     }
   }
 
-  /* ─── POLL ─── */
-  const pollAnswers = {};
-
-  // Single select
-  document.querySelectorAll('.poll-options[data-type="single"]').forEach(group => {
-    group.querySelectorAll('.poll-opt').forEach(btn => {
-      btn.addEventListener('click', () => {
-        group.querySelectorAll('.poll-opt').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        pollAnswers[group.dataset.q] = btn.dataset.val;
-        updatePollProgress();
-      });
-    });
-  });
-
-  // Multi select
-  document.querySelectorAll('.poll-options[data-type="multi"]').forEach(group => {
-    group.addEventListener('click', (e) => {
-      const opt = e.target.closest('.poll-multi');
-      if (!opt) return;
-      opt.classList.toggle('selected');
-      const q = group.dataset.q;
-      if (!pollAnswers[q]) pollAnswers[q] = [];
-      const val = opt.dataset.val;
-      if (opt.classList.contains('selected')) {
-        if (!pollAnswers[q].includes(val)) pollAnswers[q].push(val);
-      } else {
-        pollAnswers[q] = pollAnswers[q].filter(v => v !== val);
-      }
-      updatePollProgress();
-    });
-  });
-
-  // Scale
-  document.querySelectorAll('.poll-scale[data-type="scale"]').forEach(group => {
-    group.querySelectorAll('.poll-scale-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        group.querySelectorAll('.poll-scale-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        pollAnswers[group.dataset.q] = btn.dataset.val;
-        updatePollProgress();
-      });
-    });
-  });
-
-  // Text / open inputs
-  document.querySelectorAll('.poll-open[data-type="text"]').forEach(el => {
-    el.addEventListener('input', () => {
-      pollAnswers[el.dataset.q] = el.value;
-    });
-  });
-
-  function updatePollProgress() {
-    const required = ['q1','q2','q3','q4','q5','q6'];
-    const answered = required.filter(q => {
-      if (!pollAnswers[q]) return false;
-      if (Array.isArray(pollAnswers[q])) return pollAnswers[q].length > 0;
-      return pollAnswers[q] !== '';
-    });
-    const pct = (answered.length / required.length) * 100;
-    document.getElementById('pollProgressFill').style.width = pct + '%';
-  }
-
-  async function submitPoll() {
-    const btn = document.getElementById('pollSubmitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    try {
-      const { error } = await db.from('poll_responses').insert([{
-        q1_relationship:      pollAnswers.q1   || null,
-        q2_preparedness:      pollAnswers.q2   || null,
-        q3_hardest:           Array.isArray(pollAnswers.q3) ? pollAnswers.q3.join(', ') : null,
-        q4_concept:           pollAnswers.q4   || null,
-        q5_tone_importance:   pollAnswers.q5   ? parseInt(pollAnswers.q5) : null,
-        q6_involvement:       Array.isArray(pollAnswers.q6) ? pollAnswers.q6.join(', ') : null,
-        q7_failure_risk:      pollAnswers.q7   |
+</script>
+</body>
+</html>

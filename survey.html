@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Pulse Check — R2H Rehab to Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #1A3A52;
+    --navy-mid: #1E4060;
+    --navy-deep:#152E42;
+    --navy-dark:#111E2A;
+    --teal:     #1A7A8A;
+    --amber:    #D4860A;
+    --white:    #FFFFFF;
+    --w55: rgba(255,255,255,0.55);
+    --w35: rgba(255,255,255,0.35);
+    --w10: rgba(255,255,255,0.1);
+    --w04: rgba(255,255,255,0.04);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: #EAF4F6; color: var(--navy); overflow-x: hidden; line-height: 1.6; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.5; }
+
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(26,58,82,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--w10); }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo { width: 36px; height: 36px; background: var(--teal); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--white); }
+  .nav-brand-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--white); }
+  .nav-brand-text small { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--w55); text-transform: uppercase; }
+  .nav-back { font-size: 13px; color: var(--w55); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+  .nav-back:hover { color: var(--white); }
+  @media (max-width: 768px) { nav { padding: 14px 20px; } }
+
+  /* PAGE WRAPPER */
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 120px 48px 80px; }
+  @media (max-width: 768px) { .page-wrap { padding: 100px 20px 60px; } }
+
+  /* HEADER */
+  .survey-header { margin-bottom: 48px; }
+  .label { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: rgba(17,30,42,0.6); text-transform: uppercase; margin-bottom: 16px; display: block; opacity: 0.85; }
+  .survey-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,40px); line-height: 1.2; color: var(--navy); margin-bottom: 14px; }
+  .survey-header p { font-size: 16px; color: rgba(17,30,42,0.65); line-height: 1.75; font-weight: 300; max-width: 560px; }
+
+  /* PROGRESS */
+  .poll-progress-text { font-family: 'Space Mono', monospace; font-size: 11px; color: rgba(26,58,82,0.45); margin-bottom: 8px; letter-spacing: 0.05em; }
+  .poll-progress-bar { height: 2px; background: rgba(26,58,82,0.12); margin-bottom: 40px; }
+  .poll-progress-fill { height: 100%; background: var(--teal); transition: width 0.4s ease; }
+
+  /* QUESTION BLOCKS */
+  .poll-block { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(26,58,82,0.08); }
+  .poll-block:last-of-type { border-bottom: none; }
+  .poll-q-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--teal); letter-spacing: 0.12em; margin-bottom: 8px; text-transform: uppercase; }
+  .poll-q-text { font-family: 'DM Serif Display', serif; font-size: 20px; line-height: 1.4; color: var(--navy); margin-bottom: 6px; }
+  .poll-q-sub { font-size: 13px; color: rgba(26,58,82,0.5); margin-bottom: 18px; line-height: 1.5; font-weight: 300; }
+
+  /* SINGLE SELECT */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn { background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); color: rgba(26,58,82,0.75); padding: 14px 18px; font-family: 'DM Sans', sans-serif; font-size: 15px; cursor: pointer; text-align: left; transition: all 0.2s; line-height: 1.4; position: relative; min-height: 44px; width: 100%; }
+  .option-btn:hover { border-color: var(--teal); color: var(--navy); background: rgba(26,122,138,0.08); }
+  .option-btn.selected { border-color: var(--teal); background: rgba(26,122,138,0.12); color: var(--navy); font-weight: 500; }
+  .option-btn.selected::after { content: '✓'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--teal); font-size: 14px; font-weight: 700; }
+
+  /* MULTI SELECT */
+  .multi-option { display: flex; align-items: flex-start; gap: 12px; background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); padding: 14px 16px; cursor: pointer; transition: all 0.2s; min-height: 44px; user-select: none; }
+  .multi-option:hover { border-color: var(--teal); background: rgba(26,122,138,0.08); }
+  .multi-option.selected { border-color: var(--teal); background: rgba(26,122,138,0.12); }
+  .opt-checkbox { width: 16px; height: 16px; border: 1px solid rgba(26,58,82,0.3); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .multi-option.selected .opt-checkbox { background: var(--teal); border-color: var(--teal); }
+  .opt-tick { color: white; font-size: 10px; display: none; }
+  .multi-option.selected .opt-tick { display: block; }
+  .opt-label { font-size: 15px; color: rgba(26,58,82,0.75); line-height: 1.4; }
+  .multi-option.selected .opt-label { color: var(--navy); font-weight: 500; }
+
+  /* SCALE */
+  .scale-wrap { }
+  .scale-btns { display: flex; gap: 6px; align-items: center; }
+  .scale-btn { width: 48px; height: 48px; border: 1px solid rgba(26,58,82,0.15); background: rgba(26,58,82,0.04); color: rgba(26,58,82,0.6); font-family: 'Space Mono', monospace; font-size: 14px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+  .scale-btn:hover { border-color: var(--teal); color: var(--navy); background: rgba(26,122,138,0.08); }
+  .scale-btn.selected { background: var(--teal); border-color: var(--teal); color: var(--white); }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: rgba(26,58,82,0.4); font-family: 'Space Mono', monospace; }
+
+  /* OPEN TEXT */
+  .open-input { width: 100%; background: rgba(26,58,82,0.04); border: 1px solid rgba(26,58,82,0.12); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 14px 16px; resize: vertical; min-height: 80px; line-height: 1.6; transition: border-color 0.2s; outline: none; }
+  .open-input::placeholder { color: rgba(26,58,82,0.3); }
+  .open-input:focus { border-color: var(--teal); }
+
+  /* SECTION DIVIDER */
+  .poll-section-divider { display: flex; align-items: center; gap: 16px; margin: 8px 0 32px; }
+  .poll-section-divider span { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--amber); text-transform: uppercase; white-space: nowrap; }
+  .poll-section-divider::before, .poll-section-divider::after { content: ''; flex: 1; height: 1px; background: rgba(26,58,82,0.1); }
+
+  /* SUBMIT */
+  .poll-submit-section { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(26,58,82,0.1); }
+  .poll-submit-note { font-size: 13px; color: rgba(26,58,82,0.45); margin-bottom: 20px; line-height: 1.6; font-weight: 300; }
+  .btn-submit { background: var(--navy); color: var(--white); padding: 18px 40px; min-height: 44px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: background 0.2s, transform 0.2s; }
+  .btn-submit:hover { background: var(--navy-deep); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* THANK YOU */
+  .poll-thankyou { display: none; text-align: center; padding: 80px 0 40px; }
+  .poll-thankyou.show { display: block; }
+
+  /* SENDING OVERLAY */
+  .sending-overlay { display: none; position: fixed; inset: 0; background: rgba(234,244,246,0.85); backdrop-filter: blur(4px); z-index: 300; align-items: center; justify-content: center; }
+  .sending-overlay.show { display: flex; }
+  .sending-inner { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; color: var(--navy); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo">R2H</div>
+    <div class="nav-brand-text">
+      <strong>Rehab to Home</strong>
+      <small>Discharge Companion</small>
+    </div>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to main site
+  </a>
+</nav>
+
+<div class="sending-overlay" id="sending-overlay">
+  <div class="sending-inner">Sending your response...</div>
+</div>
+
+<main class="page-wrap">
+
+  <div class="survey-header">
+    <span class="label">Community Pulse</span>
+    <h1>We're building this from the community.</h1>
+    <p>Your feedback shapes everything. Not in a corporate survey kind of way — in a 'we will literally change what we build based on what you tell us' kind of way.</p>
+  </div>
+
+  <div id="poll-form">
+
+    <div class="poll-progress-text">QUESTION PROGRESS &nbsp;<span id="progressLabel">0 of 7</span></div>
+    <div class="poll-progress-bar"><div class="poll-progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <!-- Q1 -->
+    <div class="poll-block">
+      <div class="poll-q-num">01 · Your Experience</div>
+      <div class="poll-q-text">What's your relationship to spinal cord injury?</div>
+      <div class="poll-q-sub">Select the one that fits best.</div>
+      <div class="options" data-q="q1" data-type="single">
+        <button class="option-btn" data-val="sci">I have a spinal cord injury</button>
+        <button class="option-btn" data-val="family">I'm a family member or carer of someone with SCI</button>
+        <button class="option-btn" data-val="peer">I work in peer support or lived experience roles</button>
+        <button class="option-btn" data-val="clinical">I work in SCI clinical or allied health</button>
+        <button class="option-btn" data-val="other">Other connection to the SCI community</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="poll-block">
+      <div class="poll-q-num">02 · The Discharge Experience</div>
+      <div class="poll-q-text">When you left rehab — or watched someone leave — how prepared did it feel?</div>
+      <div class="poll-q-sub">No right answer. Just honest.</div>
+      <div class="options" data-q="q2" data-type="single">
+        <button class="option-btn" data-val="1">Completely blindsided. Nothing could have prepared us.</button>
+        <button class="option-btn" data-val="2">Mostly unprepared. We figured it out the hard way.</button>
+        <button class="option-btn" data-val="3">Somewhat prepared but the gaps were significant.</button>
+        <button class="option-btn" data-val="4">Reasonably prepared. Some rough patches but manageable.</button>
+        <button class="option-btn" data-val="5">Well prepared. The transition went smoothly.</button>
+      </div>
+    </div>
+
+    <!-- Q2b -->
+    <div class="poll-block">
+      <div class="poll-q-num">03 · The First Week</div>
+      <div class="poll-q-text">What was the hardest part of the first week home?</div>
+      <div class="poll-q-sub">Select all that apply.</div>
+      <div class="options" data-q="q2b" data-type="multi">
+        <div class="multi-option" data-val="ndis"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Funding and support — equipment, supports, modifications not in place</div></div>
+        <div class="multi-option" data-val="family"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Family overwhelmed and unsure what to do or who to call</div></div>
+        <div class="multi-option" data-val="routine"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Bowel, bladder, skin routines falling apart without clinical support</div></div>
+        <div class="multi-option" data-val="mental"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Mental health — the emotional crash of being home without the ward structure</div></div>
+        <div class="multi-option" data-val="info"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">No single place to find information — piecing it together from everywhere</div></div>
+        <div class="multi-option" data-val="contact"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Not knowing who to call when something went wrong</div></div>
+        <div class="multi-option" data-val="other_hard"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Something else entirely</div></div>
+      </div>
+    </div>
+
+    <div class="poll-section-divider"><span>About R2H</span></div>
+
+    <!-- Q3 -->
+    <div class="poll-block">
+      <div class="poll-q-num">04 · The Concept</div>
+      <div class="poll-q-text">R2H is a free digital guide — no download, works on any device — that walks you through discharge in four stages and is designed to be deleted when you don't need it anymore. Does that sound useful?</div>
+      <div class="poll-q-sub">Based on what you know so far.</div>
+      <div class="options" data-q="q3" data-type="single">
+        <button class="option-btn" data-val="yes_need">Yes — I needed exactly this and it didn't exist</button>
+        <button class="option-btn" data-val="yes_useful">Yes — it sounds genuinely useful</button>
+        <button class="option-btn" data-val="maybe">Maybe — depends on how it's done</button>
+        <button class="option-btn" data-val="no">No — I don't think it would have helped my situation</button>
+        <button class="option-btn" data-val="unsure">Not sure yet</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="poll-block">
+      <div class="poll-q-num">05 · The Tone</div>
+      <div class="poll-q-text">R2H is built on a principle of radical honesty — no toxic positivity, no inspirational framing, no "you've got this!" when things genuinely suck. How important is that to you?</div>
+      <div class="poll-q-sub">1 = doesn't matter · 5 = that's everything</div>
+      <div class="scale-wrap" data-q="q4" data-type="scale">
+        <div class="scale-btns">
+          <button class="scale-btn" data-val="1">1</button>
+          <button class="scale-btn" data-val="2">2</button>
+          <button class="scale-btn" data-val="3">3</button>
+          <button class="scale-btn" data-val="4">4</button>
+          <button class="scale-btn" data-val="5">5</button>
+        </div>
+        <div class="scale-labels"><span>doesn't matter</span><span>everything</span></div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="poll-block">
+      <div class="poll-q-num">06 · Your Role in This</div>
+      <div class="poll-q-text">If R2H moves forward, what would you want to be involved in?</div>
+      <div class="poll-q-sub">Select all that apply.</div>
+      <div class="options" data-q="q5" data-type="multi">
+        <div class="multi-option" data-val="codesign"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Co-design — shaping what the tool actually does and how it works</div></div>
+        <div class="multi-option" data-val="test"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Testing — trying early versions and giving blunt feedback</div></div>
+        <div class="multi-option" data-val="workingparty"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Working party — formal lived experience liaison role with Austin Health</div></div>
+        <div class="multi-option" data-val="spread"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Spreading the word — sharing this with others in the SCI community</div></div>
+        <div class="multi-option" data-val="watch"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Just staying informed — I want to know how this develops</div></div>
+        <div class="multi-option" data-val="nothing"><div class="opt-checkbox"><span class="opt-tick">✓</span></div><div class="opt-label">Nothing right now — but keep the feedback coming</div></div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="poll-block">
+      <div class="poll-q-num">07 · The Honest One</div>
+      <div class="poll-q-text">What would make R2H fail? What's the thing that could go wrong?</div>
+      <div class="poll-q-sub">Optional — but the most valuable question on this page. Blunt answers only.</div>
+      <textarea class="open-input" data-q="q6" data-type="text" placeholder="If you're going to say something, say it straight..."></textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="poll-submit-section">
+      <p class="poll-submit-note">Anonymous unless you choose to share your contact below. No data is sold. No spam. This is a community conversation, not a mailing list.</p>
+      <textarea class="open-input" data-q="contact" data-type="text" placeholder="Optional: name / email / preferred way to be contacted if you want to be part of this" style="min-height:56px;margin-bottom:20px;"></textarea>
+      <button class="btn-submit" id="submitBtn">Submit — I've said my piece</button>
+    </div>
+
+  </div>
+
+  <div class="poll-thankyou" id="thankyou">
+    <div style="font-size:40px;margin-bottom:20px;">✊</div>
+    <h3 style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);margin-bottom:12px;">That's a 1mm forward.</h3>
+    <p style="font-size:16px;color:rgba(17,30,42,0.65);line-height:1.7;max-width:460px;margin:0 auto 32px;">Your response has been recorded. It goes directly into the design of R2H — not into a spreadsheet nobody reads. The SCI community is building this. You're part of it.</p>
+    <a href="index.html" style="font-family:'DM Sans',sans-serif;font-size:14px;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal);padding-bottom:2px;">← Back to the main site</a>
+  </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://zalchkkkdznlkdpudofe.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphbGNoa2trZHpubGtkcHVkb2ZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzOTMwNDcsImV4cCI6MjA4Nzk2OTA0N30.OW4QuT2eU6e0QvjdymnuD_twwV515zjNizzGAiOYQiM';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const answers = {};
+  const TRACKED = ['q1','q2','q2b','q3','q4','q5','q6'];
+
+  function updateProgress() {
+    let answered = 0;
+    TRACKED.forEach(q => {
+      const v = answers[q];
+      if (v !== undefined && v !== '' && !(Array.isArray(v) && v.length === 0)) answered++;
+    });
+    const pct = Math.round((answered / TRACKED.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = answered + ' of 7';
+  }
+
+  // Single select
+  document.querySelectorAll('.options[data-type="single"]').forEach(group => {
+    const q = group.dataset.q;
+    group.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[q] = btn.dataset.val;
+        updateProgress();
+      });
+    });
+  });
+
+  // Multi select
+  document.querySelectorAll('.options[data-type="multi"]').forEach(group => {
+    const q = group.dataset.q;
+    answers[q] = [];
+    group.querySelectorAll('.multi-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        opt.classList.toggle('selected');
+        const val = opt.dataset.val;
+        if (opt.classList.contains('selected')) {
+          if (!answers[q].includes(val)) answers[q].push(val);
+        } else {
+          answers[q] = answers[q].filter(v => v !== val);
+        }
+        updateProgress();
+      });
+    });
+  });
+
+  // Scale
+  document.querySelectorAll('.scale-wrap[data-type="scale"]').forEach(wrap => {
+    const q = wrap.dataset.q;
+    wrap.querySelectorAll('.scale-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        wrap.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[q] = btn.dataset.val;
+        updateProgress();
+      });
+    });
+  });
+
+  // Open text
+  document.querySelectorAll('.open-input[data-type="text"]').forEach(input => {
+    input.addEventListener('input', () => {
+      answers[input.dataset.q] = input.value.trim();
+    });
+  });
+
+  // Submit
+  document.getElementById('submitBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    document.getElementById('sending-overlay').classList.add('show');
+
+    try {
+      await db.from('poll_responses').insert([{
+        q1_relationship:    answers.q1  || null,
+        q2_preparedness:    answers.q2  || null,
+        q3_hardest:         Array.isArray(answers.q2b) ? answers.q2b.join(', ') : null,
+        q4_concept:         answers.q3  || null,
+        q5_tone_importance: answers.q4  ? parseInt(answers.q4) : null,
+        q6_involvement:     Array.isArray(answers.q5) ? answers.q5.join(', ') : null,
+        q7_failure_risk:    answers.q6  || null,
+        contact_info:       answers.contact || null
+      }]);
+    } catch (e) {
+      console.error('Submission error:', e);
+    }
+
+    document.getElementById('sending-overlay').classList.remove('show');
+    document.getElementById('poll-form').style.display = 'none';
+    document.getElementById('thankyou').classList.add('show');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = '7 of 7';
+  });
+</script>
+</body>
+</html>
